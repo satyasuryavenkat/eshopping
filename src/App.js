@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import React from 'react';
+import Signup from './Components/Signup/Signup';
 import './App.css';
+import Login from './Components/Login'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PasswordReset from './Components/ResetPassword/PasswordReset';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-           Edit Surya<code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <Router>
+            <Switch>
+              <Route path="/" exact component={Login}/>
+              <Route path ="/signup" component={Signup} />
+              <Route path ="/signin" component={Login} />
+              <Route path ="/reset-password" component={PasswordReset} />
+            </Switch>
+        </Router>
+      
   );
 }
 
