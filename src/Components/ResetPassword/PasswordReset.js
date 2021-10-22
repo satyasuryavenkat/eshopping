@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { Card, Form, Button,Alert } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 import { Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-export default function Login() {
+
+export default function PasswordReset() {
   const emailRef = useRef();
-  const passwordRef = useRef();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false);
+  const [message,setMessage]=useState('')
 
   async function handleSubmit(e) {
 
@@ -14,49 +15,45 @@ export default function Login() {
 
     try {
         setError('')
+        setMessage('')
       setLoading(true);
-      // await login(emailRef.current.value, passwordRef.current.value)
-      // history.push("/")
+    //   await resetPassword(emailRef.current.value)
+      setMessage('check you inbox for further instructions')
     }
     catch
     {
-      setError('failed to login')
+      setError('failed to reset password')
     }
     setLoading(false);
   }
-  
-  
+
   return (
     <>
-      <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
+    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       <div className="w-100" style={{ maxWidth: "400px" }}>
-    
-
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Sign In</h2>
+          <h2 className="text-center mb-4">Password Reset</h2>
           {error && <Alert variant="danger" style={{textAlign:'center'}}>{error}</Alert>}
+          {message && <Alert variant="success" style={{textAlign:'center'}}>{message}</Alert>}
+
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
             <br></br>
             <Button className="w-100" type="submit" disabled={loading} >
-              Sign in
+              Update Password
             </Button>
             <div className="w-100 text-center mt-2">
-        Forgot Password? <Link to="/reset-password" style={{ textDecoration: 'none' }}>Forgot Password? </Link>
+         <Link to="/signin" style={{ textDecoration: 'none' }}>Log In</Link>
       </div>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-      Create a account? <Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link>
+        Create a account? <Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link>
       </div>
       </div>
       </Container>
